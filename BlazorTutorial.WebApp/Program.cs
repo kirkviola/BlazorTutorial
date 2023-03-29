@@ -1,3 +1,5 @@
+using BlazorTutorial.Plugins.InMemory;
+using BlazorTutorial.UseCases.PluginInterfaces;
 using BlazorTutorial.WebApp.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepo>();
 
 var app = builder.Build();
 
