@@ -1,9 +1,24 @@
 ﻿@page "/"
+@using BlazorTutorial.CoreBusiness;
+@using BlazorTutorial.UseCases.Inventories.Interfaces;
 
-<PageTitle>Index</PageTitle>
+@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
 
-<h1>Hello, world!</h1>
+<PageTitle>Test Page</PageTitle>
+<!-- The 'at' sign tells the compiler that you are writing C#-->
+<ul>
+    @foreach(var inv in _inventories)
+    {
+        <li>@inv.InventoryName</li>        
+    } 
+</ul>
 
-Welcome to your new app.
+@code {
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    private List<Inventory> _inventories = new List<Inventory>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync()).ToList();
+    }
+}

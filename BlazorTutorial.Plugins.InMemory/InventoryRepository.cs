@@ -3,11 +3,11 @@ using BlazorTutorial.UseCases.PluginInterfaces;
 
 namespace BlazorTutorial.Plugins.InMemory
 {
-    public class InventoryRepo : IInventoryRepository
+    public class InventoryRepository : IInventoryRepository
     {
         private List<Inventory> _inventories;
 
-        public InventoryRepo()
+        public InventoryRepository()
         {
             _inventories = new List<Inventory>() 
             { 

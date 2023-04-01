@@ -1,4 +1,5 @@
 ﻿using BlazorTutorial.CoreBusiness;
+using BlazorTutorial.UseCases.Inventories.Interfaces;
 using BlazorTutorial.UseCases.PluginInterfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlazorTutorial.UseCases.Inventories
 {
-    public class ViewInventoriesByNameUseCase
+    public class ViewInventoriesByNameUseCase : IViewInventoriesByNameUseCase
     {
         private readonly IInventoryRepository inventoryRepository;
         public ViewInventoriesByNameUseCase(IInventoryRepository inventoryRepository)
