@@ -1,4 +1,6 @@
 using BlazorTutorial.Plugins.InMemory;
+using BlazorTutorial.UseCases.Inventories;
+using BlazorTutorial.UseCases.Inventories.Interfaces;
 using BlazorTutorial.UseCases.PluginInterfaces;
 using BlazorTutorial.WebApp.Data;
 using Microsoft.AspNetCore.Components;
@@ -11,7 +13,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
-builder.Services.AddSingleton<IInventoryRepository, InventoryRepo>();
+builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
+
+builder.Services.AddTransient<IViewInventoriesByNameUseCase, ViewInventoriesByNameUseCase>();
+
+// AddScoped also exists, basically maintains lifetime until connection between server and client broken
 
 var app = builder.Build();
 
