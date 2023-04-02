@@ -1,0 +1,26 @@
+﻿@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
+<table class="table">
+    <thead>
+        <tr>Name</tr>
+        <tr>Quantity</tr>
+        <tr>Price</tr>
+        <tr></tr>
+    </thead>
+    <tbody>
+    <InventoryListItemComponent inventories="listInventories"></InventoryListItemComponent>
+    </tbody>
+</table>
+@code {
+    private List<Inventory> listInventories = new List<Inventory>();
+
+    [Parameter]
+    public string SearchTerm { get; set; } = string.Empty;
+
+    // This is like ngOnChanges
+    protected override async Task OnParametersSetAsync()
+    {
+        this.listInventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(this.SearchTerm)).ToList();
+    }
+
+
+}
