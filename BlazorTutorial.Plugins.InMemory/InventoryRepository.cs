@@ -1,5 +1,6 @@
 ﻿using BlazorTutorial.CoreBusiness;
 using BlazorTutorial.UseCases.PluginInterfaces;
+using System.Linq;
 
 namespace BlazorTutorial.Plugins.InMemory
 {
@@ -22,6 +23,21 @@ namespace BlazorTutorial.Plugins.InMemory
             if (string.IsNullOrWhiteSpace(name)) return await Task.FromResult(_inventories);
 
             return _inventories.Where(x => x.InventoryName.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+
+        public Task AddInventoryAsync(Inventory inventory)
+        {
+            var maxId = _inventories.Max(x => x.InventoryId);
+            inventory.InventoryId += maxId;
+
+            _inventories.Add(inventory);
+
+            return Task.CompletedTask;
+        }
+
+        public async Task<bool> ExistsAsync(Inventory inventory)
+        {
+            return await Task.FromResult(_inventories.Any(x => x.InventoryName.Equals(inventory.InventoryName, StringComparison.OrdinalIgnoreCase)));
         }
     }
 }

@@ -16,6 +16,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 
 builder.Services.AddTransient<IViewInventoriesByNameUseCase, ViewInventoriesByNameUseCase>();
+builder.Services.AddTransient<IAddInventoryUseCase, AddInventoryUseCase>();
 
 // AddScoped also exists, basically maintains lifetime until connection between server and client broken
 
